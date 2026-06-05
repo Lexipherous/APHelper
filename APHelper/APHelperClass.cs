@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.ResourceManagement.Util;
 using UnityEngine.UI;
-using APHelper.Functions;
 
 
 [assembly: MelonInfo(typeof(APHelper.APHelperClass), "APHelper", "0.1.0", "Lexipherous")]
@@ -24,7 +23,7 @@ namespace APHelper {
             MethodInfo patchInteractableAbsorbable = AccessTools.Method(typeof(Patches.Patches), "CustomInteractableAbsorbable");
             HarmonyInstance.Patch(originalInteractableAbsorbable, new HarmonyMethod(patchInteractableAbsorbable));
             
-            MethodInfo originalObjectAbsorbHandler = AccessTools.Method(typeof(Gameplay_ObjectAbsorbHandler), "OnInteract");
+            MethodInfo originalObjectAbsorbHandler = AccessTools.Method(typeof(Gameplay_ObjectAbsorbHandler), "OnSelfPullStart");
             MethodInfo patchObjectAbsorbHandler = AccessTools.Method(typeof(Patches.Patches), "CustomObjectAbsorbHandler");
             HarmonyInstance.Patch(originalObjectAbsorbHandler, new HarmonyMethod(patchObjectAbsorbHandler));
             Melon<APHelperClass>.Logger.Msg("[APHelper] Initialized! :D");
